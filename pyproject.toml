@@ -1,0 +1,14 @@
+[project]
+name = "sky-habbits"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "django-cors-headers>=4.4.0",
+    "django>=5.1.1",
+    "djangorestframework>=3.15.2",
+    "drf-social-oauth2>=3.1.0",
+    "psycopg[binary]>=3.2.2",
+    "python-dotenv>=1.0.1",
+]
