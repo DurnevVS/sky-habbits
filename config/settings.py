@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     # 3rd party
+    "drf_yasg",
     "rest_framework",
     "oauth2_provider",
     "social_django",
@@ -166,3 +167,11 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Swagger
+SWAGGER_SETTINGS = {
+    "SECURITY_DEFINITIONS": {
+        "basic": {"type": "basic"},
+        "api_key": {"type": "apiKey", "name": "authorization", "in": "header"},
+    },
+}
