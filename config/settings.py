@@ -175,3 +175,11 @@ SWAGGER_SETTINGS = {
         "api_key": {"type": "apiKey", "name": "authorization", "in": "header"},
     },
 }
+SWAGGER_EXCLUDE_URLS = (
+    "token",
+    "revoke_token",
+    "convert_token",
+    "invalidate_sessions",
+    "invalidate_refresh_tokens",
+    "disconnect_backend",
+)
