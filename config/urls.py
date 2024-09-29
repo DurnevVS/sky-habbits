@@ -20,6 +20,7 @@ from django.urls import path, re_path, include
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+from .swagger import CustomOpenAPISchemaGenerator
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -31,6 +32,7 @@ schema_view = get_schema_view(
         license=openapi.License(name="BSD License"),
     ),
     public=True,
+    generator_class=CustomOpenAPISchemaGenerator,
     permission_classes=(permissions.AllowAny,),
 )
 urlpatterns = [
