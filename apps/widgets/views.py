@@ -14,6 +14,8 @@ class TelegramWidgetAPIView(APIView):
     Можно выбрать размер кнопки и радиус закругления углов.
     """
 
+    permission_classes = ()
+
     @swagger_auto_schema(
         query_serializer=TelegramWidgetSerializer,
         responses={200: '{ "preview_url": str, source_code": str }'},

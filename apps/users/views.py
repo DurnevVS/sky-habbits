@@ -13,12 +13,16 @@ class RegisterUserAPIView(CreateAPIView):
     """
 
     serializer_class = UserSerializer
+    permission_classes = ()
 
 
 class LoginTelegramAPIView(APIView):
     """
     Получение ссылки для редиректа на страницу аутентификации по телеграм.
     """
+
+    permission_classes = ()
+
     @swagger_auto_schema(
         responses={200: '{ "login_url": str }'},
     )

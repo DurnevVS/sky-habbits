@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import Habbit
 
-# Register your models here.
+
+admin.site.register(Habbit)
