@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # 3rd party
     "drf_yasg",
     "rest_framework",
+    "rest_framework.authtoken",
     "oauth2_provider",
     "social_django",
     "drf_social_oauth2",
@@ -100,15 +101,16 @@ AUTHENTICATION_BACKENDS = (
 )
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
+        "apps.users.authentication.TokenAuthentication",
         "oauth2_provider.contrib.rest_framework.OAuth2Authentication",
         "drf_social_oauth2.authentication.SocialAuthentication",
     ),
 }
+
 LOGIN_REDIRECT_URL = "/widgets/telegram-widget-preview/"
+SOCIAL_AUTH_TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_BOT_DOMAIN = os.environ.get("TELEGRAM_BOT_DOMAIN")
 TELEGRAM_DATA_REDIRECT = f"https://{TELEGRAM_BOT_DOMAIN}/auth/complete/telegram/"
-SOCIAL_AUTH_TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
-
 WSGI_APPLICATION = "config.wsgi.application"
 
 

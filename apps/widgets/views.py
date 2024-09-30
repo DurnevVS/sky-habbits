@@ -8,6 +8,12 @@ from .serializers import TelegramWidgetSerializer
 
 
 class TelegramWidgetAPIView(APIView):
+    """
+    Получения source-code виджета телеграмма с настройками,
+    который можно использовать для использования на своём сайте.
+    Можно выбрать размер кнопки и радиус закругления углов.
+    """
+
     @swagger_auto_schema(
         query_serializer=TelegramWidgetSerializer,
         responses={200: '{ "preview_url": str, source_code": str }'},
@@ -32,7 +38,7 @@ def telegram_widget_preview(request):
     radius = request.GET.get("radius")
     return render(
         request,
-        "users/telegram-widget-preview.html",
+        "widgets/telegram-widget-preview.html",
         {
             "size": size,
             "radius": radius,

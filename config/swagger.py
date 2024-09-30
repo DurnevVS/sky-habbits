@@ -4,7 +4,7 @@ from drf_yasg.generators import OpenAPISchemaGenerator, EndpointEnumerator
 
 class CustomEndpointEnumerator(EndpointEnumerator):
     """
-    Проверяем, находится ли url в списке запретов
+    Дополнительно проверяем, находится ли url в списке запретов
     """
 
     def should_include_endpoint(
@@ -17,9 +17,5 @@ class CustomEndpointEnumerator(EndpointEnumerator):
         )
 
 
-class CustomOpenAPISchemaGenerator(OpenAPISchemaGenerator):
-    """
-    Кастомный генератор документации
-    """
-
+class OpenAPISchemaGenerator(OpenAPISchemaGenerator):
     endpoint_enumerator_class = CustomEndpointEnumerator
