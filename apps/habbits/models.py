@@ -14,16 +14,16 @@ class Habbit(models.Model):
         on_delete=models.CASCADE,
         verbose_name=_("Пользователь"),
     )
-    name = models.CharField(max_length=255, verbose_name=_("Название"), unique=True)
+    name = models.CharField(
+        max_length=255,
+        verbose_name=_("Название"),
+        unique=True,
+    )
     place = models.TextField(verbose_name=_("Место"))
     action = models.TextField(verbose_name=_("Действие"))
     action_start_time = models.TimeField(verbose_name=_("Время начала действия"))
-    action_time_seconds = models.PositiveIntegerField(
-        verbose_name=_("Время на выполение действия в секундах")
-    )
-    period_days = models.PositiveIntegerField(
-        verbose_name=_("Периодичность выполнения в днях"),
-    )
+    action_time_seconds = models.PositiveIntegerField(verbose_name=_("Время на выполение действия в секундах"))
+    period_days = models.PositiveIntegerField(verbose_name=_("Периодичность выполнения в днях"))
     is_beneficial = models.BooleanField(
         verbose_name=_("Полезная привычка"),
         default=True,
@@ -41,13 +41,10 @@ class Habbit(models.Model):
         blank=True,
         null=True,
     )
-    is_public = models.BooleanField(
-        verbose_name=_("Публичная привычка"),
-        default=False,
-    )
+    is_public = models.BooleanField(verbose_name=_("Публичная привычка"), default=False)
     periodic_task = models.ForeignKey(
         "django_celery_beat.PeriodicTask",
-        verbose_name=_("Периодическая задача"),
+        verbose_name=_("Привычка"),
         on_delete=models.DO_NOTHING,
         blank=True,
         null=True,

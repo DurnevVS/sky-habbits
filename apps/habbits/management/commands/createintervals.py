@@ -8,9 +8,6 @@ class Command(BaseCommand):
     """
 
     def handle(self, *args, **options):
-        [
-            IntervalSchedule.objects.create(id=i, every=i, period="days")
-            for i in range(1, 8)
-        ]
+        [IntervalSchedule.objects.create(id=i, every=i, period="days") for i in range(1, 8)]
 
     print("Интервалы созданы")

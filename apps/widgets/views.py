@@ -26,10 +26,11 @@ class TelegramWidgetAPIView(APIView):
             size = serializer.validated_data["size"]
             radius = serializer.validated_data["radius"]
             preview_url = request.build_absolute_uri(
-                f"/widgets/telegram-widget-preview/?size={size}&radius={radius}"
+                f"/widgets/telegram-widget-preview/?size={size}&radius={radius}",
             )
             source_code = render_to_string(
-                "widgets/telegram-widget.html", {"size": size, "radius": radius}
+                "widgets/telegram-widget.html",
+                {"size": size, "radius": radius},
             )
             return Response({"preview_url": preview_url, "source_code": source_code})
         return Response(serializer.errors)
@@ -41,8 +42,5 @@ def telegram_widget_preview(request):
     return render(
         request,
         "widgets/telegram-widget-preview.html",
-        {
-            "size": size,
-            "radius": radius,
-        },
+        {"size": size, "radius": radius},
     )

@@ -4,16 +4,12 @@ from .models import Habbit
 
 def validate_reward_and_reward_habbit_choice(habbit: Habbit):
     if habbit.is_beneficial and bool(habbit.reward) == bool(habbit.reward_habbit):
-        raise serializers.ValidationError(
-            'У полезной привычки нужно указать только "reward" или "reward_habbit"'
-        )
+        raise serializers.ValidationError('У полезной привычки нужно указать только "reward" или "reward_habbit"')
 
 
 def non_beneficial_habbit_cant_have_reward(habbit: Habbit):
     if not habbit.is_beneficial and habbit.reward or habbit.reward_habbit:
-        raise serializers.ValidationError(
-            "У приятной привычки не может быть никакой награды"
-        )
+        raise serializers.ValidationError("У приятной привычки не может быть никакой награды")
 
 
 def reward_habbit_must_be_non_beneficial(habbit: Habbit):

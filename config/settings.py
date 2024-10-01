@@ -119,8 +119,8 @@ LOGIN_REDIRECT_URL = "/widgets/telegram-widget-preview/"
 SOCIAL_AUTH_TELEGRAM_BOT_TOKEN = os.environ.get("TELEGRAM_BOT_TOKEN")
 TELEGRAM_BOT_DOMAIN = os.environ.get("TELEGRAM_BOT_DOMAIN")
 TELEGRAM_DATA_REDIRECT = f"https://{TELEGRAM_BOT_DOMAIN}/auth/complete/telegram/"
-WSGI_APPLICATION = "config.wsgi.application"
 
+WSGI_APPLICATION = "config.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
