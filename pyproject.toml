@@ -5,6 +5,8 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "celery[redis]>=5.4.0",
+    "django-celery-beat>=2.7.0",
     "django-cors-headers>=4.4.0",
     "django-types>=0.19.1",
     "django>=5.1.1",
@@ -13,5 +15,6 @@ dependencies = [
     "drf-yasg>=1.21.7",
     "psycopg[binary]>=3.2.2",
     "python-dotenv>=1.0.1",
+    "requests>=2.32.3",
     "setuptools>=75.1.0",
 ]

@@ -31,7 +31,8 @@ SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
 DEBUG = os.environ.get("DJANGO_DEBUG").upper() == "TRUE"
 
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(",")
-
+CSRF_TRUSTED_ORIGINS = [f"https://{os.environ.get('TELEGRAM_BOT_DOMAIN')}"]
+SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
 
 # Application definition
 
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
     "social_django",
     "drf_social_oauth2",
     "corsheaders",
+    "django_celery_beat",
     # Apps
     "apps.users",
     "apps.widgets",
@@ -92,13 +94,12 @@ TEMPLATES = [
     },
 ]
 
-SECURE_CROSS_ORIGIN_OPENER_POLICY = "same-origin-allow-popups"
-
 AUTHENTICATION_BACKENDS = (
     "social_core.backends.telegram.TelegramAuth",
     "drf_social_oauth2.backends.DjangoOAuth2",
     "django.contrib.auth.backends.ModelBackend",
 )
+
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
@@ -158,7 +159,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = "ru"
 
 TIME_ZONE = "UTC"
 
@@ -192,3 +193,9 @@ SWAGGER_EXCLUDE_URLS = (
     "invalidate_refresh_tokens",
     "disconnect_backend",
 )
+
+# Celery
+CELERY_BROKER_URL = "redis://localhost:6379/0"
+CELERY_RESULT_BACKEND = "redis://localhost:6379/0"
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+BEAT_SYNC_EVERY = 1
