@@ -1,0 +1,53 @@
+services:
+
+  db:
+    restart: on-failure
+    image: postgres
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  redis:
+    image: redis
+    restart: on-failure
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: .
+    restart: on-failure
+    env_file:
+      - .env
+    command: celery -A config worker -l info
+    depends_on:
+      - redis
+      - app
+
+  celery-beat:
+    build: .
+    restart: on-failure
+    command: celery -A config beat -l info
+    depends_on:
+      - celery
+      - db
+
+  app:
+    build: .
+    restart: on-failure
+    env_file:
+      - .env
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
